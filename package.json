@@ -1,0 +1,30 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "Back-end da minha aplicação de cadastro de cliente",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaniCaldeira/Back-end.git"
+  },
+  "keywords": [
+    "back-end",
+    "aula",
+    "programação",
+    "internet"
+  ],
+  "author": "Danielle Caldeira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaniCaldeira/Back-end/issues"
+  },
+  "homepage": "https://github.com/DaniCaldeira/Back-end#readme",
+  "dependencies": {
+    "mysql2": "^3.9.2"
+  }
+}
