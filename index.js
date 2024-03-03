@@ -31,9 +31,11 @@ const cliente = new Cliente(0, "333.333.333-33",
 
 const clienteQQ = new Cliente();
 
-let listaClientes = [];
-clienteQQ.consultar("Moraes").then((lista) => {
-    listaClientes = lista;
+clienteQQ.consultar("Caldeira").then((listaClientes) => {
+    console.log("Clientes encontrados:")
+    for (const cliente of listaClientes){
+        console.log(cliente.toJSON());
+    }
 }).catch((erro) =>{
     console.log("Não foi possivel consultar o cliente.", erro);
 });
