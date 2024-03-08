@@ -1,28 +1,46 @@
 import ClienteDAO from "../Persistencia/ClienteDAO.js";
 export default class Cliente {
     #codigo;
-    #cpf;
     #nome;
-    #endereço;
-    #bairro;
-    #cidade;
-    #estado;
-    #telefone;
-    #email;
+    #senha;
+    #Vendid;
+    #venqtd;
+    #vendPreço;
 
-    constructor (codigo= 0, cpf= "", nome= "", endereço= "", bairro= "", cidade= "", estado= "", telefone= "", email= "" )
+
+        /// USUARIOOOOO
+    constructor (codigo= 0, nome= "", senha= "")
     {
         this.#codigo = codigo
-        this.#cpf =  cpf
         this.#nome = nome
-        this.#endereço = endereço
-        this.#bairro = bairro
-        this.#cidade = cidade
-        this.#estado = estado
-        this.#telefone = telefone
-        this.#email = email
-
+        this.#senha = senha
     }
+
+
+//VENDA-------------------------------------------------
+get Vendid(){
+    return this.#Vendid;
+}
+
+set Vendid(novoid) {
+    this.#Vendid = novoid;
+}
+
+get venqtd(){
+    return this.#venqtd;
+}
+
+set venqtd(novoqtd) {
+    this.#venqtd = novoqtd;
+}
+get venpreço(){
+    return this.#vendPreço;
+}
+
+set venpreço(novopreço) {
+    this.#vendPreço = novopreço;
+}
+//---------------------------------------------------------
 
     get codigo(){
         return this.#codigo;
@@ -32,73 +50,29 @@ export default class Cliente {
         this.#codigo = novoCodigo;
     }
 
-    get cpf(){
-        return this.#cpf;
-    }
-
-    set cpf(novoCpf) {
-        this.#cpf = novoCpf;
-    }
-
     get nome(){
         return this.#nome;
     }
 
-    set nome(novoNome) {
-        this.#nome = novoNome;
+    set nome(novonome) {
+        this.#nome = novonome;
     }
 
-    get endereço(){
-        return this.#endereço;
+    get senha(){
+        return this.#senha;
     }
 
-    set endereço(novoEndereço) {
-        this.#endereço = novoEndereço;
-    }
-
-    get bairro(){
-        return this.#bairro;
-    }
-
-    set bairro(novoBairro) {
-        this.#bairro = novoBairro;
-    }
-
-    get cidade(){
-        return this.#cidade;
-    }
-
-    set cidade(novoCidade) {
-        this.#cidade = novoCidade;
-    }
-
-    get estado(){
-        return this.#estado;
-    }
-
-    set estado(novoEstado) {
-        this.#estado = novoEstado;
-    }
-
-    get telefone(){
-        return this.#telefone;
-    }
-
-    set telefone(novoTelefone) {
-        this.#telefone = novoTelefone;
-    }
-
-    get email(){
-        return this.#email;
-    }
-
-    set email(novoEmail) {
-        this.#email = novoEmail;
+    set senha(novosenha) {
+        this.#senha = novosenha;
     }
 
     async gravar (){
         const dao = new ClienteDAO();
         await dao.gravar(this);
+    }
+    async gravarvenda (){
+        const dao = new ClienteDAO();
+        await dao.gravarvenda(this);
     }
 
     async atualizar (){
@@ -115,22 +89,19 @@ export default class Cliente {
         const dao = new ClienteDAO();
         return await dao.consultar(termoDePesquisa);
     }
+    async consultarvenda (termoDePesquisa){
+        const dao = new ClienteDAO();
+        return await dao.consultar(termoDePesquisa);
+    }
 
     toString(){
-        return`Cliente codigo: ${this.#codigo} - nome: ${this.#nome}`;
+        return`Cliente codigo: ${this.#codigo} - senha: ${this.#senha}`;
     }
 
     toJSON(){
         return{
-            "codigo": this.#codigo,
-            "cpf": this.#cpf,
             "nome": this.#nome,
-            "endereço": this.endereço,
-            "bairro": this.#bairro,
-            "cidade": this.#cidade,
-            "estado": this.#estado,
-            "telefone": this.#telefone,
-            "email": this.#email
+            "senha": this.#senha,
 
         }
     }

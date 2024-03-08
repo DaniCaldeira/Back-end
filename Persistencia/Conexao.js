@@ -10,7 +10,7 @@
             user: 'root',
             password: '',
             port: 3306,
-            database: 'backend',
+            database: 'backendd',
             waitForConnections: true,
             connectionLimit: 10,
             maxIdle: 10, 

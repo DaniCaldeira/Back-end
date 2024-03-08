@@ -1,38 +1,50 @@
 import Cliente  from "./Modelo/Clientes.js";
 
+// INICIANDO OBJETO COM O USUARIO E SENHA 
 
-const cliente = new Cliente(0, "333.333.333-33", 
- "Matheus Caldeira",
- "Rua das Laranjeiras, 201",
- "Vila Ocidental",
- "São Paulo",
- "SP",
- "(18)99999-9999",
- "aaaaaaa@gmail.com",
+const cliente = new Cliente( 0,'DANI','123456'
     );
-
-/*cliente.gravar().then(() =>{
-    console.log("Cliente gravado com sucesso!");
-}).catch((erro) =>{
-    console.log(erro);
-});*/
-
-/*cliente.atualizar().then(() =>{
-    console.log("Cliente atualizado com sucesso!");
-}).catch((erro) =>{
-    console.log(erro);
-});*/
-
-/*cliente.excluir().then(() =>{
-    console.log("Cliente excluido com sucesso!");
-}).catch((erro) =>{
-    console.log(erro);
-});*/
-
+//---------------------------------------------------------------------------------CHAMANDO A FUNÇÃO DE GRAVAR PASSANDO O PRORPRIO OBJETO 
+//cliente.gravar(this);
 const clienteQQ = new Cliente();
+//-------------------------------------------------------------------------------------FUNÇÃO PARA GRAVAR VENDA A BAIXO FUNCIONANDO--------------------
 
-clienteQQ.consultar("Caldeira").then((listaClientes) => {
+/*cliente.codigo=4
+cliente.venpreço=100;
+cliente.venqtd=2;
+cliente.gravarvenda(this)
+
+
+/*------------------------------------------------------------------------------------FUNÇÃO PARA ATUALIZAR--------------------------------------
+*/
+
+/*cliente.Vendid=2;
+cliente.venpreço=30;
+cliente.venqtd=10;
+cliente.atualizar(this)*/
+
+
+//----------------------------------------------------------------------------------------- EXCLUIR---------------------------------------------
+/*cliente.Vendid=3
+cliente.excluir(this);*/
+
+
+
+
+//CONSULTANDO USUARIO PELO ID 
+clienteQQ.consultar(4).then((listaClientes) => {
     console.log("Clientes encontrados:")
+    for (const cliente of listaClientes){
+        console.log(cliente.toJSON());
+    }
+}).catch((erro) =>{
+    console.log("Não foi possivel consultar o cliente.", erro);
+});
+
+// CONSULTAR VENDAA PELO ID DA VENDA
+
+clienteQQ.consultarvenda(2).then((listaClientes) => {
+    console.log("Vendas encontradas:")
     for (const cliente of listaClientes){
         console.log(cliente.toJSON());
     }
