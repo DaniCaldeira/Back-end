@@ -9,7 +9,7 @@ const cliente = new Cliente( 0,'DANI','123456'
 const clienteQQ = new Cliente();
 //-------------------------------------------------------------------------------------FUNÇÃO PARA GRAVAR VENDA A BAIXO FUNCIONANDO--------------------
 
-/*cliente.codigo=4
+cliente.codigo=4
 cliente.venpreço=100;
 cliente.venqtd=2;
 cliente.gravarvenda(this)
