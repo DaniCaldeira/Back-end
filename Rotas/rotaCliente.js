@@ -2,12 +2,13 @@
 //requisições em uma determinado endpoint
 
 import {Router} from 'express';
-import ClienteController from '../Controle/clienteController';
+import ClienteController from '../Controle/clienteController.js';
 
 const rotaCliente = new Router();
 const cliCtrl = new ClienteController();
 
 rotaCliente
+.get('/', cliCtrl.consultar)
 .get('/:termo', cliCtrl.consultar)
 .post('/', cliCtrl.gravar)
 .put('/:codigo', cliCtrl.atualizar)
