@@ -1,8 +1,23 @@
-import Cliente  from "./Modelo/Clientes.js";
+import express from "express";
+import rotaCliente from "./Rotas/rotaCliente.js";
+
+const host = '0.0.0.0'; 
+const porta = 3000;
+
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/clientes', rotaCliente);
+
+app.listen(porta, host, ()=> {
+    console.log(`Servirdor rodando em http://${host}:${porta}`);
+})
+
 
 // INICIANDO OBJETO COM O USUARIO E SENHA 
 
-const cliente = new Cliente( 0,'DANI','123456'
+/*const cliente = new Cliente( 0,'DANI','123456'
     );
 //---------------------------------------------------------------------------------CHAMANDO A FUNÇÃO DE GRAVAR PASSANDO O PRORPRIO OBJETO 
 //cliente.gravar(this);
@@ -32,7 +47,7 @@ cliente.excluir(this);*/
 
 
 //CONSULTANDO USUARIO PELO ID 
-clienteQQ.consultar(4).then((listaClientes) => {
+/*clienteQQ.consultar(4).then((listaClientes) => {
     console.log("Clientes encontrados:")
     for (const cliente of listaClientes){
         console.log(cliente.toJSON());
@@ -50,4 +65,4 @@ clienteQQ.consultarvenda(2).then((listaClientes) => {
     }
 }).catch((erro) =>{
     console.log("Não foi possivel consultar o cliente.", erro);
-});
+});*/

@@ -1,6 +1,6 @@
 import ClienteDAO from "../Persistencia/ClienteDAO.js";
-export default class Cliente {
-    #codigo;
+export default class Cliente {  //CRIANDO OBJETO
+    #codigo; // definindo chaves privadas
     #nome;
     #senha;
     #Vendid;
@@ -9,7 +9,7 @@ export default class Cliente {
 
 
         /// USUARIOOOOO
-    constructor (codigo= 0, nome= "", senha= "")
+    constructor (codigo= 0, nome= "", senha= "")  // Obriga quando você instaciar o objeto cliente(codigo,nome,senha)
     {
         this.#codigo = codigo
         this.#nome = nome
@@ -67,7 +67,7 @@ set venpreço(novopreço) {
     }
 
     async gravar (){
-        const dao = new ClienteDAO();
+        const dao = new ClienteDAO();  // dao recebe objeto clientedao que dentro dele tem funções prontas
         await dao.gravar(this);
     }
     async gravarvenda (){
