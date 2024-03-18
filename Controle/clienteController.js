@@ -22,9 +22,9 @@ export default class ClienteController{
             const dados = requisicao.body; //extrair dados do corpo da requisição
             const nome = dados.nome;
             const senha = dados.senha;
-        
-            //pseudo validação nos dados
-            if (0 && nome && senha){
+            
+            //pseudo validação nos dados   
+            if (nome && senha){
                 const cliente = new Cliente(0, nome, senha)
                 cliente.gravar().then(()=>{
                     resposta.status(201);

@@ -10,7 +10,7 @@ async gravar(cliente) {
     if (cliente instanceof Cliente){
         const conexao = await conectar();
 
-        console.log("DENTRO DA FUNÇÃO DE GRAVAR",cliente.nome,cliente.senha,cliente.codigo);
+        console.log("DENTRO DA FUNÇÃO DE GRAVAR",cliente.codigo,cliente.nome,cliente.senha);
         const sql = `INSERT INTO usuario1 (nome, senha) 
                     values (? , ?)`;
         

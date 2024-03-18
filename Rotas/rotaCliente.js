@@ -8,9 +8,9 @@ const rotaCliente = new Router();
 const cliCtrl = new ClienteController();
 
 rotaCliente
+.get('/:termo', cliCtrl.consultar)  // ROTA PADRÃO ESTA CONSULTADO USAURIO PASSANDO ID POR URL
 .get('/', cliCtrl.consultar)
-.get('/:termo', cliCtrl.consultar)
-.post('/', cliCtrl.gravar)
+.post('/', cliCtrl.gravar) // ALTERAR A ROTA DE GRAVAR PARA GRAVAR O USUARIO
 .put('/:codigo', cliCtrl.atualizar)
 .patch('/:codigo', cliCtrl.atualizar)
 .delete('/:codigo', cliCtrl.excluir);
