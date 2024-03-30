@@ -18,7 +18,7 @@ export default class ClienteController{
 
         //HTTP gravar um cliente é enviar uma requisição do tipo POST
         //trazendo dados no formato JSON
-        if(requisicao.method === 'POST' && requisicao.is('application/json')) {
+       if(requisicao.method === 'POST' && requisicao.is('application/json')) {
             const dados = requisicao.body; //extrair dados do corpo da requisição
             const nome = dados.nome;
             const senha = dados.senha;
@@ -50,13 +50,13 @@ export default class ClienteController{
             }
 
         }
-        else{
-            resposta.status(400);
-            resposta.json({
-                'status': 'Requisição inválida!'
-            })
+       else{
+           resposta.status(400);
+           resposta.json({
+                'status': 'Requisição inválida dentro da gravar!'
+           })
 
-        }
+       }
 
 
 
@@ -126,7 +126,7 @@ export default class ClienteController{
                     resposta.status(500);
                     resposta.json({
                         'status':false,
-                        'mensagem': 'Não foi possivel excluis!' + erro.message
+                        'mensagem': 'Não foi possivel excluir!' + erro.message
                     })
                 })
             }
@@ -172,7 +172,7 @@ export default class ClienteController{
             resposta.status(405);
             resposta.json({
                 'status':false,
-                'mensagem': 'Requisição inválida!'
+                'mensagem': 'Requisição inválida! dentro da consultar'
             })
         }
         

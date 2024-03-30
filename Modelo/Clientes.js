@@ -1,48 +1,19 @@
+// Cliente.js
+
 import ClienteDAO from "../Persistencia/ClienteDAO.js";
-export default class Cliente {  //CRIANDO OBJETO
-    #codigo; // definindo chaves privadas
+
+export default class Cliente {
+    #codigo;
     #nome;
     #senha;
-    #Vendid;
-    #venqtd;
-    #vendPreço;
 
-
-        /// USUARIOOOOO
-    constructor (codigo= 0, nome= "", senha= "")  // Obriga quando você instaciar o objeto cliente(codigo,nome,senha)
-    {
-        this.#codigo = codigo
-        this.#nome = nome
-        this.#senha = senha
+    constructor(codigo = 0, nome = "", senha = "") {
+        this.#codigo = codigo;
+        this.#nome = nome;
+        this.#senha = senha;
     }
 
-
-//VENDA-------------------------------------------------
-get Vendid(){
-    return this.#Vendid;
-}
-
-set Vendid(novoid) {
-    this.#Vendid = novoid;
-}
-
-get venqtd(){
-    return this.#venqtd;
-}
-
-set venqtd(novoqtd) {
-    this.#venqtd = novoqtd;
-}
-get venpreço(){
-    return this.#vendPreço;
-}
-
-set venpreço(novopreço) {
-    this.#vendPreço = novopreço;
-}
-//---------------------------------------------------------
-
-    get codigo(){
+    get codigo() {
         return this.#codigo;
     }
 
@@ -50,64 +21,51 @@ set venpreço(novopreço) {
         this.#codigo = novoCodigo;
     }
 
-    get nome(){
+    get nome() {
         return this.#nome;
     }
 
-    set nome(novonome) {
-        this.#nome = novonome;
+    set nome(novoNome) {
+        this.#nome = novoNome;
     }
 
-    get senha(){
+    get senha() {
         return this.#senha;
     }
 
-    set senha(novosenha) {
-        this.#senha = novosenha;
+    set senha(novaSenha) {
+        this.#senha = novaSenha;
     }
 
-    async gravar (){
-        const dao = new ClienteDAO();  // dao recebe objeto clientedao que dentro dele tem funções prontas
+    async gravar() {
+        const dao = new ClienteDAO();
         await dao.gravar(this);
     }
-    async gravarvenda (){
-        const dao = new ClienteDAO();
-        await dao.gravarvenda(this);
-    }
 
-    async atualizar (){
+    async atualizar() {
         const dao = new ClienteDAO();
         await dao.atualizar(this);
     }
 
-    async excluir (){
+    async excluir() {
         const dao = new ClienteDAO();
         await dao.excluir(this);
     }
 
-    async consultar (termoDePesquisa){
-        const dao = new ClienteDAO();
-        return await dao.consultar(termoDePesquisa);
-    }
-    async consultarvenda (termoDePesquisa){
+    async consultar(termoDePesquisa) {
         const dao = new ClienteDAO();
         return await dao.consultar(termoDePesquisa);
     }
 
-    toString(){
-        return`Cliente codigo: ${this.#codigo} - senha: ${this.#senha}`;
+    toString() {
+        return `Cliente código: ${this.#codigo} - Nome: ${this.#nome}`;
     }
 
-    toJSON(){
-        return{
+    toJSON() {
+        return {
+            "codigo": this.#codigo,
             "nome": this.#nome,
-            "senha": this.#senha,
-
-        }
+            "senha": this.#senha
+        };
     }
-
-
-
-
-
 }

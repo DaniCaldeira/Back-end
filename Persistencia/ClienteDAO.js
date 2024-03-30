@@ -1,154 +1,89 @@
+// ClienteDAO.js
+
 import conectar from "./Conexao.js";
-import Cliente from "../Modelo/Clientes.js";
+import Cliente from "../Modelo/Cliente.js";
+import Venda from "../Modelo/Vendas.js";
 
-export default class ClienteDAO{
+export default class ClienteDAO {
 
-//// GRAVAR USUARIO
-
-/// FUNCIONANDOOOOOOOOOOOOOOOOOOOOOOO
-async gravar(cliente) {
-    if (cliente instanceof Cliente){
-        const conexao = await conectar();
-
-        console.log("DENTRO DA FUNÇÃO DE GRAVAR",cliente.codigo,cliente.nome,cliente.senha);
-        const sql = `INSERT INTO usuario1 (nome, senha) 
-                    values (? , ?)`;
-        
-        const parametros = [
-            cliente.nome,
-            cliente.senha,
-        ];
-        const [resultados, campos] = await conexao.execute(sql, parametros);
-        cliente.codigo = resultados.insertId;
+    async gravar(cliente) {
+        if (cliente instanceof Cliente) {
+            const conexao = await conectar();
+            const sql = `INSERT INTO usuario1 (nome, senha) VALUES (?, ?)`;
+            const parametros = [cliente.nome, cliente.senha];
+            const [resultados, campos] = await conexao.execute(sql, parametros);
+            cliente.codigo = resultados.insertId;
+        }
     }
 
-}
-
-/// GRAVAR VENDAAAAAAAAAAAAA
-//FUNCIONANDOOOOOOOOOOOO
-async gravarvenda(cliente){
-
-    const conexao = await conectar();
-
-    console.log("DENTRO DA FUNÇÃO DE GRAVAR VENDA",cliente.codigo, cliente.venqtd,cliente.venpreço);
-    const sql = `INSERT INTO vendas (codigo,Venqtd,Venpreco) 
-                values (?,?,?)`;
-    
-    const parametros = [
-        cliente.codigo,
-        cliente.venqtd,
-        cliente.venpreço,
-    ];
-    const [resultados, campos] = await conexao.execute(sql, parametros);
-    cliente.Vendid = resultados.insertId;
-    console.log("VENDA GRAVADA COM SUCESSO");
-}
-    ///////-------------------------------------------------------------
-   /// FUNÇÃO DE ATUALIZAR FUNCIONANDO 
+    async gravarVenda(venda) {
+        if (venda instanceof Venda) {
+            const conexao = await conectar();
+            const sql = `INSERT INTO vendas (codigo, Venqtd, Venpreco) VALUES (?, ?, ?)`;
+            const parametros = [venda.clienteCodigo, venda.quantidade, venda.precoTotal];
+            const [resultados, campos] = await conexao.execute(sql, parametros);
+            venda.id = resultados.insertId;
+        }
+    }
 
     async atualizar(cliente) {
-        if (cliente instanceof Cliente){
+        if (cliente instanceof Cliente) {
             const conexao = await conectar();
-            const sql = `UPDATE vendas
-            set Venqtd= ?, Venpreco= ? WHERE Vendid = ?`;
-            const parametros = [
-               cliente.venqtd,
-               cliente.venpreço,
-               cliente.Vendid,
-            ]
-
+            const sql = `UPDATE usuario1 SET nome = ?, senha = ? WHERE codigo = ?`;
+            const parametros = [cliente.nome, cliente.senha, cliente.codigo];
             await conexao.execute(sql, parametros);
-
         }
-        
-        console.log("ATUALIZADO COM SUCESSO");
     }
-//
+
+    async atualizarVenda(venda) {
+        if (venda instanceof Venda) {
+            const conexao = await conectar();
+            const sql = `UPDATE vendas SET Venqtd = ?, Venpreco = ? WHERE Vendid = ?`;
+            const parametros = [venda.quantidade, venda.precoTotal, venda.id];
+            await conexao.execute(sql, parametros);
+        }
+    }
+
     async excluir(cliente) {
-        if(cliente instanceof Cliente){
+        if (cliente instanceof Cliente) {
+            const conexao = await conectar();
+            const sql = `DELETE FROM usuario1 WHERE codigo = ?`;
+            const parametros = [cliente.codigo];
+            await conexao.execute(sql, parametros);
+        }
+    }
+
+    async excluirVenda(venda) {
+        if (venda instanceof Venda) {
             const conexao = await conectar();
             const sql = `DELETE FROM vendas WHERE Vendid = ?`;
-            const parametros =[
-                cliente.Vendid
-            ]
-            await conexao.execute(sql,parametros);
+            const parametros = [venda.id];
+            await conexao.execute(sql, parametros);
         }
-        console.log("EXCLUIDO COM SUCESSO");
     }
-
-    async consultarOLD(termoDePesquisa) {
-        if (termoDePesquisa === undefined){
-            termoDePesquisa = "";
-        }
-        let sql = "";
-        if (isNaN(parseInt(termoDePesquisa))){
-            sql = `SELECT * FROM cliente WHERE nome LIKE ? `;
-            termoDePesquisa= '%' + termoDePesquisa + '%';
-        }
-        else{
-            sql = `SELECT * FROM cliente WHERE id = ?`;
-        }
-
-        const conexao = await conectar();
-        const [registros] = await conexao.execute(sql, [termoDePesquisa]);
-
-        let listaClientes = [];
-        for (const registro of registros){
-            const cliente = new Cliente(
-                registro.id,
-                registro.cpf,
-                registro.nome,
-            );
-            listaClientes.push(cliente);
-        }
-        return listaClientes;
-    }
-
-
-    ////CONSULTA USUARIO
 
     async consultar(id) {
-          const sql = `SELECT * FROM usuario1 WHERE codigo = ?`;
-
-
+        const sql = `SELECT * FROM usuario1 WHERE codigo = ?`;
         const conexao = await conectar();
         const [registros] = await conexao.execute(sql, [id]);
-
         let listaClientes = [];
-        for (const registro of registros){
-            const cliente = new Cliente(
-               registro.id,
-               registro.nome,
-               registro.senha,
-            );
+        for (const registro of registros) {
+            const cliente = new Cliente(registro.codigo, registro.nome, registro.senha);
             listaClientes.push(cliente);
         }
         return listaClientes;
     }
 
-    async consultarvenda(id) {
+    async consultarVenda(id) {
         const sql = `SELECT * FROM vendas WHERE Vendid = ?`;
-
-
-      const conexao = await conectar();
-      const [registros] = await conexao.execute(sql, [id]);
-
-      let listaClientes = [];
-      for (const registro of registros){
-          const cliente = new Cliente();
-          registro.Vendid,
-          registro.venqtd,
-          registro.venpreço,
-          registro.codigo
-          cliente.Vendid
-          cliente.venqtd
-          cliente.venpreço
-        
-          listaClientes.push(cliente);
-      }
-      return listaClientes;
-
-  }
-
-
+        const conexao = await conectar();
+        const [registros] = await conexao.execute(sql, [id]);
+        let listaVendas = [];
+        for (const registro of registros) {
+            const venda = new Venda(registro.clienteCodigo, registro.produtoCodigo, registro.quantidade, registro.precoTotal);
+            venda.id = registro.Vendid;
+            listaVendas.push(venda);
+        }
+        return listaVendas;
+    }
 }

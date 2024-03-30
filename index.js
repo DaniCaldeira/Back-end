@@ -1,5 +1,6 @@
 import express from "express";
 import rotaCliente from "./Rotas/rotaCliente.js";
+import rotaVendas from "./Rotas/rotaVendas.js";
 
 const host = '0.0.0.0'; 
 const porta = 3000;
@@ -9,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/clientes', rotaCliente);
+app.use('/vendas', rotaVendas); 
 
 app.listen(porta, host, ()=> {
     console.log(`Servirdor rodando em http://${host}:${porta}`);
