@@ -1,11 +1,15 @@
 import express from "express";
 import rotaCliente from "./Rotas/rotaCliente.js";
 import rotaVendas from "./Rotas/rotaVendas.js";
+import cors from 'cors';
 
 const host = '0.0.0.0'; 
 const porta = 3000;
 
 const app = express();
+app.use(cors({
+    origin: '*'
+}))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -15,7 +19,7 @@ app.use('/vendas', rotaVendas);
 app.listen(porta, host, ()=> {
     console.log(`Servirdor rodando em http://${host}:${porta}`);
 })
-
+start
 
 // INICIANDO OBJETO COM O USUARIO E SENHA 
 

@@ -9,10 +9,11 @@ const cliCtrl = new ClienteController();
 
 rotaCliente
 .get('/:termo', cliCtrl.consultar)  // ROTA PADRÃO ESTA CONSULTADO USAURIO PASSANDO ID POR URL
-.get('/', cliCtrl.consultar)
+.get('/', cliCtrl.consultar1)
+.post('/cadastrar',cliCtrl.gravarCliente)
 .post('/', cliCtrl.gravar) // ALTERAR A ROTA DE GRAVAR PARA GRAVAR O USUARIO
-.put('/:codigo', cliCtrl.atualizar)
-.patch('/:codigo', cliCtrl.atualizar)
+.put('/:id', cliCtrl.atualizar)
+.patch('/:id', cliCtrl.atualizar)
 .delete('/:codigo', cliCtrl.excluir);
 
 export default rotaCliente;
